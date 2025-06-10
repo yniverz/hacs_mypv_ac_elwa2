@@ -2,7 +2,7 @@
 
 # my‑PV AC ELWA 2 – Home Assistant Integration
 
-A simple, no‑frills integration that lets Home Assistant talk Modbus‑TCP to a **my‑PV AC ELWA 2** water‑heater. The component exposes live temperature readings and gives you a convenient slider to set the heater’s target power.
+A simple integration that lets Home Assistant talk to a **my‑PV AC ELWA 2** water‑heater using Modbus‑TCP. The component exposes live temperature readings and gives you a convenient slider to set the heater’s target power.
 
 ---
 
@@ -36,11 +36,6 @@ A simple, no‑frills integration that lets Home Assistant talk Modbus‑TCP to
 3. Search for **“my‑PV AC ELWA 2”**, click **Download**, then **Install**.
 4. **Restart** Home Assistant to load the new integration.
 
-### Manual copy
-1. Copy the `custom_components/mypv_ac_elwa2` folder from the repo
-   into `<config>/custom_components/` on your HA instance.
-2. Restart Home Assistant.
-
 ---
 
 ## ⚙️ Configuration (UI‑only)
@@ -64,16 +59,3 @@ No YAML required.
   * `1002`: target power (W)
 * Writes register `1000` to set target power.
 * Values outside **0 … 3500 W** are automatically clamped.
-
----
-
-## 🛠️ Troubleshooting
-* Enable debug logging:
-  ```yaml
-  logger:
-    logs:
-      custom_components.mypv_ac_elwa2: debug
-````
-
-* Verify the ELWA is reachable on port 502.
-* Check that no other Modbus client is blocking the connection.
