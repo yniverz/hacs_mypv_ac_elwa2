@@ -57,4 +57,4 @@ No YAML required.
 * Values outside **0 … 3500 W** are automatically clamped.
 
 ---
-v0.1.4
+v0.1.5

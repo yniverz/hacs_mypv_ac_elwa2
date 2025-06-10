@@ -6,24 +6,28 @@ from .coordinator import ElwaCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
+PLATFORMS = ["sensor", "number"]      # keep this in one place
+
 async def async_setup_entry(hass: HomeAssistant, entry):
-    """Set up one AC Elwa 2."""
+    """Set up one AC Elwa 2 unit."""
     hass.data.setdefault(DOMAIN, {})
+
     conf = entry.data
     coord = ElwaCoordinator(
         hass,
         host=conf["host"],
-        scan_sec=conf.get("scan_interval", 10),
-        resend_sec=conf.get("resend_seconds", 30),
+        scan_sec=conf.get("scan_interval", 30),
+        resend_sec=conf.get("resend_seconds", 300),
     )
     await coord.async_config_entry_first_refresh()
     hass.data[DOMAIN][entry.entry_id] = coord
 
-    # register platforms
-    hass.config_entries.async_setup_platforms(entry, ["sensor", "number"])
+    # ← FIX: forward the entry to the platforms
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 
+
 async def async_unload_entry(hass, entry):
-    await hass.config_entries.async_unload_platforms(entry, ["sensor", "number"])
+    await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
     hass.data[DOMAIN].pop(entry.entry_id)
     return True
