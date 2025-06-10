@@ -51,9 +51,9 @@ No YAML required.
 ## 📝 How it works
 * Connects to `port 502`, slave‑id `1`.
 * Reads two holding registers:
+  * `1000`: power (W)
   * `1001`: temperature (°C × 0.1)
-  * `1002`: target power (W)
-* Writes register `1000` to set target power.
+* Writes register `1000` to set power.
 * Values outside **0 … 3500 W** are automatically clamped.
 
 ---
