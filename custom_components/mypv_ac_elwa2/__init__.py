@@ -13,7 +13,6 @@ async def async_setup_entry(hass: HomeAssistant, entry):
     hass.data.setdefault(DOMAIN, {})
 
     conf = entry.data
-    _LOGGER.warning(f"Setting up entry for {conf.get(CONF_SCAN_INTERVAL, 10)} seconds scan interval and {conf.get(CONF_RESEND, 10)} seconds resend interval.")
     coord = ElwaCoordinator(
         hass,
         host=conf["host"],

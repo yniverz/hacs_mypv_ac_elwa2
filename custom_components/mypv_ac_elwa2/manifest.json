@@ -1,7 +1,7 @@
 {
   "domain": "mypv_ac_elwa2",
   "name": "my-PV AC Elwa 2",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "documentation": "https://github.com/yniverz/hacs_mypv_ac_elwa2",
   "requirements": ["pymodbus~=3.6"],
   "codeowners": ["@yniverz"],
