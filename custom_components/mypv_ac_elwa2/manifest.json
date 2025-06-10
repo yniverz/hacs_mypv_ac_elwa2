@@ -1,9 +1,9 @@
 {
   "domain": "mypv_ac_elwa2",
   "name": "my-PV AC Elwa 2",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "documentation": "https://github.com/yniverz/hacs_mypv_ac_elwa2",
-  "requirements": ["pymodbus~=3.6"],
+  "requirements": ["pymodbus~=3.6", "aiohttp~=3.8"],
   "codeowners": ["@yniverz"],
   "iot_class": "local_polling",
   "config_flow": true

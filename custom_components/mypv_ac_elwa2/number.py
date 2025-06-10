@@ -12,6 +12,7 @@ class ElwaNumber(CoordinatorEntity, NumberEntity):
     _attr_native_max_value = MAX_W
     _attr_native_step = 1
     _attr_unit_of_measurement = "W"
+    _attr_native_unit_of_measurement = "W"
     _attr_mode = NumberMode.SLIDER
 
     def __init__(self, coordinator, entry_id):

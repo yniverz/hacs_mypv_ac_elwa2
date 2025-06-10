@@ -19,6 +19,7 @@ class ElwaSensor(CoordinatorEntity, SensorEntity):
         super().__init__(coordinator)
         self._attr_name = f"AC Elwa 2 {name}"
         self._attr_unit_of_measurement = unit
+        self._attr_native_unit_of_measurement = unit
         self._attr_device_class = device_class
         self._key = key
         self._attr_unique_id = f"{entry_id}_{key}"
