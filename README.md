@@ -25,13 +25,9 @@ A simple integration that lets Home Assistant talk to a **my‑PV AC ELWA 2*
 
 1. Make sure you have [HACS](https://hacs.xyz) installed.
 2. In **HACS → Integrations → ⋯ → *Custom repositories*** add
-
-   ```
-   ```
-
+```
 [https://github.com/yniverz/mypv\_ac\_elwa2](https://github.com/yniverz/mypv_ac_elwa2)
-
-````
+```
    as **Integration**.
 3. Search for **“my‑PV AC ELWA 2”**, click **Download**, then **Install**.
 4. **Restart** Home Assistant to load the new integration.
@@ -59,3 +55,6 @@ No YAML required.
   * `1002`: target power (W)
 * Writes register `1000` to set target power.
 * Values outside **0 … 3500 W** are automatically clamped.
+
+---
+v0.1.3
