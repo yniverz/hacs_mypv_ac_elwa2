@@ -10,6 +10,7 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
+
 class ElwaCoordinator(DataUpdateCoordinator):
     def __init__(self, hass, host, scan_sec, resend_sec):
         super().__init__(
