@@ -47,7 +47,7 @@ class ElwaCoordinator(DataUpdateCoordinator):
         power = 0
         temp_raw = 0
         try:
-            r = await fetch_json(f"http://{self.host}/data.jsn")
+            data = await fetch_json(f"http://{self.host}/data.jsn")
             power = data.get("power_elwa2", 0)
             temp_raw = data.get("temp1", 0)
         except Exception as e:
