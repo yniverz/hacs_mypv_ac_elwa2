@@ -1,0 +1,14 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to AC Elwa 2",
+        "data": {
+          "host": "IP address",
+          "scan_interval": "Poll interval (s)",
+          "resend_seconds": "Resend target every … s"
+        }
+      }
+    }
+  }
+}
