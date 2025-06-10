@@ -35,22 +35,23 @@ class ElwaCoordinator(DataUpdateCoordinator):
 
         # rr = await self._client.read_holding_registers(address=POWER_REG, slave=1)
         # power = rr.registers[0] if rr.registers else 0
+        # rr = await self._client.read_holding_registers(address=TEMP_REG, slave=1)
+        # temp_raw = rr.registers[0] if rr.registers else 0
 
-        # get power from http://<host>/data.jsn instead
         r = requests.get(f"http://{self.host}/data.jsn")
         power = 0
+        temp_raw = 0
         if r.status_code != 200:
             _LOGGER.error("Failed to fetch data from %s: %s", self.host, r.text)
         else:
+
             try:
                 data = r.json()
                 power = data.get("power_elwa2", 0)
+                temp_raw = data.get("temp1", 0)
             except ValueError as e:
                 _LOGGER.error("Invalid JSON response from %s: %s", self.host, e)
         
-
-        rr = await self._client.read_holding_registers(address=TEMP_REG, slave=1)
-        temp_raw = rr.registers[0] if rr.registers else 0
 
         return {
             "temperature": temp_raw * 0.1,
