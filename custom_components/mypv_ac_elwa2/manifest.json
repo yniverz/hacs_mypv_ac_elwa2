@@ -1,7 +1,7 @@
 {
   "domain": "mypv_ac_elwa2",
   "name": "my-PV AC Elwa 2",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "documentation": "https://github.com/yniverz/hacs_mypv_ac_elwa2",
   "requirements": ["aiohttp~=3.8"],
   "codeowners": ["@yniverz"],

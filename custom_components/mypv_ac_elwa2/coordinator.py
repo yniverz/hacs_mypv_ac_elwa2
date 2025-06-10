@@ -58,7 +58,7 @@ class ElwaCoordinator(DataUpdateCoordinator):
     async def write_target(self, watts: int):
         watts = max(0, min(MAX_W, watts))
         self._last_target = watts
-        send_get(f"http://{self.host}/control.html?power={watts}")
+        await send_get(f"http://{self.host}/control.html?power={watts}")
 
     async def _resend_loop(self):
         """Periodically resend non-zero target to overcome the ELWA timeout."""
