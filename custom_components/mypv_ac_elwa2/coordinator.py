@@ -43,7 +43,7 @@ class ElwaCoordinator(DataUpdateCoordinator):
         # power = rr.registers[0] if rr.registers else 0
         # rr = await self._client.read_holding_registers(address=TEMP_REG, slave=1)
         # temp_raw = rr.registers[0] if rr.registers else 0
-        _LOGGER.debug("Fetching data from %s", self.host)
+        _LOGGER.warning("Fetching data from %s", self.host)
 
         power = 0
         temp_raw = 0
