@@ -55,6 +55,3 @@ No YAML required.
   * `1001`: temperature (°C × 0.1)
 * Writes register `1000` to set power.
 * Values outside **0 … 3500 W** are automatically clamped.
-
----
-v0.1.5
