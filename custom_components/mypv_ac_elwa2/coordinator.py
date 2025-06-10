@@ -5,7 +5,7 @@ from pymodbus.client import AsyncModbusTcpClient
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .const import (
-    DOMAIN, DEFAULT_PORT, POWER_REG, TEMP_REG, MAX_W,
+    DOMAIN, DEFAULT_PORT, POWER_SET_REG, POWER_REG, TEMP_REG, MAX_W,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -29,19 +29,25 @@ class ElwaCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self):
         """Read temp & power in one round-trip."""
         await self._client.connect()
-        rr = await self._client.read_holding_registers(address=POWER_REG, count=2, slave=1)
-        power_target, temp_raw = rr.registers
+        # rr = await self._client.read_holding_registers(address=POWER_REG, count=2, slave=1)
+        # power_target, temp_raw = rr.registers
+
+        rr = await self._client.read_holding_registers(address=POWER_REG, slave=1)
+        power = rr.registers[0] if rr.registers else 0
+        rr = await self._client.read_holding_registers(address=TEMP_REG, slave=1)
+        temp_raw = rr.registers[0] if rr.registers else 0
+
         return {
             "temperature": temp_raw * 0.1,
-            "target_power": power_target,
+            "current_power": power,
         }
 
     async def write_target(self, watts: int):
         watts = max(0, min(MAX_W, watts))
         self._last_target = watts
-        await self._client.write_register(address=POWER_REG, value=watts, slave=1)
+        await self._client.write_register(address=POWER_SET_REG, value=watts, slave=1)
         # also update local state so the Number shows the new value immediately
-        self.async_set_updated_data({**self.data, "target_power": watts})
+        self.async_set_updated_data({**self.data, "current_power": watts})
 
     async def _resend_loop(self):
         """Periodically resend non-zero target to overcome the ELWA timeout."""

@@ -4,7 +4,7 @@ from .const import DOMAIN
 
 SENSORS = (
     ("temperature", "Boiler Temperature", UnitOfTemperature.CELSIUS, "temperature"),
-    ("target_power", "Target Power", UnitOfPower.WATT, "power"),
+    ("current_power", "Current Power", UnitOfPower.WATT, "power"),
 )
 
 async def async_setup_entry(hass, entry, async_add_entities):
