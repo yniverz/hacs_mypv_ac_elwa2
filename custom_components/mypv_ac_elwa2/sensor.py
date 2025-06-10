@@ -16,7 +16,6 @@ async def async_setup_entry(hass, entry, async_add_entities):
 
 class ElwaSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator, entry_id, key, name, unit, device_class):
-        # self._coord = coordinator
         super().__init__(coordinator)
         self._attr_name = f"AC Elwa 2 {name}"
         self._attr_unit_of_measurement = unit
@@ -26,8 +25,8 @@ class ElwaSensor(CoordinatorEntity, SensorEntity):
 
     @property
     def available(self):
-        return self._coord.last_update_success
+        return self.coordinator.last_update_success
 
     @property
     def native_value(self):
-        return self._coord.data.get(self._key)
+        return self.coordinator.data.get(self._key)

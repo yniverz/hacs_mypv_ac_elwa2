@@ -15,7 +15,6 @@ class ElwaNumber(CoordinatorEntity, NumberEntity):
     _attr_mode = NumberMode.SLIDER
 
     def __init__(self, coordinator, entry_id):
-        # self._coord = coordinator
         super().__init__(coordinator)
         self._attr_unique_id = f"{entry_id}_target_power"
         self._last_value = 0
@@ -26,4 +25,4 @@ class ElwaNumber(CoordinatorEntity, NumberEntity):
 
     async def async_set_native_value(self, value: float):
         self._last_value = value
-        await self._coord.write_target(int(value))
+        await self.coordinator.write_target(int(value))
