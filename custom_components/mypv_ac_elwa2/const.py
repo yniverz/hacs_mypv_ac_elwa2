@@ -6,9 +6,9 @@ CONF_RESEND = "resend_seconds"
 
 DEFAULT_PORT = 502
 DEFAULT_SCAN_INTERVAL = 10      # seconds
-DEFAULT_RESEND = 30             # seconds
+DEFAULT_RESEND = 10             # seconds
 
 POWER_SET_REG = 1000                # uint16 W  (R/W)
-POWER_REG = 1074                 # uint16 W (R)
+POWER_REG = 1000                 # uint16 W (R)
 TEMP_REG = 1001                 # uint16 0.1 °C (R)
 MAX_W = 3500

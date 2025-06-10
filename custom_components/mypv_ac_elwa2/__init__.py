@@ -17,7 +17,7 @@ async def async_setup_entry(hass: HomeAssistant, entry):
         hass,
         host=conf["host"],
         scan_sec=conf.get(CONF_SCAN_INTERVAL, 10),
-        resend_sec=conf.get(CONF_RESEND, 30),
+        resend_sec=conf.get(CONF_RESEND, 10),
     )
     await coord.async_config_entry_first_refresh()
     hass.data[DOMAIN][entry.entry_id] = coord
