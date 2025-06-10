@@ -18,7 +18,7 @@ class ElwaCoordinator(DataUpdateCoordinator):
             name=f"elwa2_{host}",
             update_interval=timedelta(seconds=scan_sec),
         )
-        self._client = AsyncModbusTcpClient(host, DEFAULT_PORT)
+        self._client = AsyncModbusTcpClient(host=host, port=DEFAULT_PORT)
         self._last_target = 0
         self._resend_sec = resend_sec
         # schedule resend loop
