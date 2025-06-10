@@ -2,7 +2,7 @@
 
 # my‑PV AC ELWA 2 – Home Assistant Integration
 
-A simple integration that lets Home Assistant talk to a **my‑PV AC ELWA 2** water‑heater using Modbus‑TCP. The component exposes live temperature readings and gives you a convenient slider to set the heater’s target power.
+A simple integration that lets Home Assistant talk to a **my‑PV AC ELWA 2** water‑heater using HTTP. The component exposes live temperature readings and gives you a convenient slider to set the heater’s target power.
 
 ---
 
@@ -40,7 +40,7 @@ Add the integration via **Settings → Devices & Services → + Add** and 
 
 | Field             | Default | Notes                                  |
 |-------------------|---------|----------------------------------------|
-| **IP address**    | –       | ELWA 2 Modbus/TCP host                 |
+| **IP address**    | –       | ELWA 2 HTTP host                       |
 | **Poll interval** | 10 s    | Minimum 5 s                            |
 | **Resend target** | 30 s    | How often to resend a non‑zero target  |
 
