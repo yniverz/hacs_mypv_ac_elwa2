@@ -55,13 +55,14 @@ class ElwaCoordinator(DataUpdateCoordinator):
     async def write_target(self, watts: int):
         watts = max(0, min(MAX_W, watts))
         self._last_target = watts
+        await self._client.connect()
         await self._client.write_register(address=POWER_SET_REG, value=watts, slave=1)
 
     async def _resend_loop(self):
         """Periodically resend non-zero target to overcome the ELWA timeout."""
         while True:
             await asyncio.sleep(self._resend_sec)
-            _LOGGER.warning("ELWA resend loop running for %s", self.host)
+            # _LOGGER.warning("ELWA resend loop running for %s", self.host)
             if self._last_target:
                 try:
                     await self.write_target(self._last_target)
