@@ -46,8 +46,6 @@ class ElwaCoordinator(DataUpdateCoordinator):
         watts = max(0, min(MAX_W, watts))
         self._last_target = watts
         await self._client.write_register(address=POWER_SET_REG, value=watts, slave=1)
-        # also update local state so the Number shows the new value immediately
-        self.async_set_updated_data({**self.data, "current_power": watts})
 
     async def _resend_loop(self):
         """Periodically resend non-zero target to overcome the ELWA timeout."""

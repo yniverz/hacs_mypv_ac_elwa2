@@ -15,11 +15,11 @@ class ElwaNumber(NumberEntity):
 
     def __init__(self, coordinator, entry_id):
         self._coord = coordinator
-        self._attr_unique_id = f"{entry_id}_current_power"
+        self._attr_unique_id = f"{entry_id}_target_power"
 
     @property
     def native_value(self):
-        return self._coord.data.get("current_power")
+        return self.value if self.value else 0
 
     async def async_set_native_value(self, value: float):
         await self._coord.write_target(int(value))
