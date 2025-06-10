@@ -3,7 +3,7 @@ import asyncio
 import logging
 from pymodbus.client import AsyncModbusTcpClient
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
-import requests
+import aiohttp
 
 from .const import (
     DOMAIN, DEFAULT_PORT, POWER_SET_REG, POWER_REG, TEMP_REG, MAX_W,
@@ -11,6 +11,12 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
+async def fetch_json(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            response.raise_for_status()  # Optional: raise an error for bad status codes
+            data = await response.json()
+            return data
 
 class ElwaCoordinator(DataUpdateCoordinator):
     def __init__(self, hass, host, scan_sec, resend_sec):
@@ -38,19 +44,14 @@ class ElwaCoordinator(DataUpdateCoordinator):
         # rr = await self._client.read_holding_registers(address=TEMP_REG, slave=1)
         # temp_raw = rr.registers[0] if rr.registers else 0
 
-        r = requests.get(f"http://{self.host}/data.jsn")
         power = 0
         temp_raw = 0
-        if r.status_code != 200:
-            _LOGGER.error("Failed to fetch data from %s: %s", self.host, r.text)
-        else:
-
-            try:
-                data = r.json()
-                power = data.get("power_elwa2", 0)
-                temp_raw = data.get("temp1", 0)
-            except ValueError as e:
-                _LOGGER.error("Invalid JSON response from %s: %s", self.host, e)
+        try:
+            r = await fetch_json(f"http://{self.host}/data.jsn")
+            power = data.get("power_elwa2", 0)
+            temp_raw = data.get("temp1", 0)
+        except Exception as e:
+            _LOGGER.error("HTTP/JSON Error from %s: %s", self.host, e)
         
 
         return {
