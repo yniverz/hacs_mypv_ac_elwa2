@@ -27,7 +27,7 @@ class ElwaCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self):
         """Read temp & power in one round-trip."""
         await self._client.connect()
-        rr = await self._client.read_holding_registers(TEMP_REG, 2, slave=1)
+        rr = await self._client.read_holding_registers(address=TEMP_REG, count=2, slave=1)
         temp_raw, power_target = rr.registers
         return {
             "temperature": temp_raw * 0.1,
@@ -37,7 +37,7 @@ class ElwaCoordinator(DataUpdateCoordinator):
     async def write_target(self, watts: int):
         watts = max(0, min(MAX_W, watts))
         self._last_target = watts
-        await self._client.write_register(POWER_REG, watts, slave=1, unit=1)
+        await self._client.write_register(address=POWER_REG, value=watts, slave=1, unit=1)
         # also update local state so the Number shows the new value immediately
         self.async_set_updated_data({**self.data, "target_power": watts})
 
