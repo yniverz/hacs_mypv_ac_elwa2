@@ -1,12 +1,14 @@
 from datetime import timedelta
 import asyncio
-from . import _LOGGER
+import logging
 from pymodbus.client import AsyncModbusTcpClient
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .const import (
     DOMAIN, DEFAULT_PORT, POWER_REG, TEMP_REG, MAX_W,
 )
+
+_LOGGER = logging.getLogger(__name__)
 
 class ElwaCoordinator(DataUpdateCoordinator):
     def __init__(self, hass, host, scan_sec, resend_sec):
