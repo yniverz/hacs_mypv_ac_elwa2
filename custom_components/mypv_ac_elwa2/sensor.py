@@ -10,16 +10,17 @@ SENSORS = (
 async def async_setup_entry(hass, entry, async_add_entities):
     coord = hass.data[DOMAIN][entry.entry_id]
     async_add_entities(
-        [ElwaSensor(coord, *args) for args in SENSORS]
+        [ElwaSensor(coord, entry.entry_id, *args) for args in SENSORS]
     )
 
 class ElwaSensor(SensorEntity):
-    def __init__(self, coordinator, key, name, unit, device_class):
+    def __init__(self, coordinator, entry_id, key, name, unit, device_class):
         self._coord = coordinator
         self._attr_name = f"AC Elwa 2 {name}"
         self._attr_unit_of_measurement = unit
         self._attr_device_class = device_class
         self._key = key
+        self._attr_unique_id = f"{entry_id}_{key}"
 
     @property
     def available(self):

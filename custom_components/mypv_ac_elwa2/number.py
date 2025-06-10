@@ -3,7 +3,7 @@ from .const import DOMAIN, MAX_W
 
 async def async_setup_entry(hass, entry, async_add_entities):
     coord = hass.data[DOMAIN][entry.entry_id]
-    async_add_entities([ElwaNumber(coord)])
+    async_add_entities([ElwaNumber(coord, entry.entry_id)])
 
 class ElwaNumber(NumberEntity):
     _attr_name = "AC Elwa 2 Target Power"
@@ -13,8 +13,9 @@ class ElwaNumber(NumberEntity):
     _attr_unit_of_measurement = "W"
     _attr_mode = NumberMode.SLIDER
 
-    def __init__(self, coordinator):
+    def __init__(self, coordinator, entry_id):
         self._coord = coordinator
+        self._attr_unique_id = f"{entry_id}_target_power"
 
     @property
     def native_value(self):

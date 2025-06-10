@@ -13,6 +13,7 @@ _LOGGER = logging.getLogger(__name__)
 
 class ElwaCoordinator(DataUpdateCoordinator):
     def __init__(self, hass, host, scan_sec, resend_sec):
+        self.host = host
         super().__init__(
             hass,
             _LOGGER,
@@ -38,7 +39,7 @@ class ElwaCoordinator(DataUpdateCoordinator):
     async def write_target(self, watts: int):
         watts = max(0, min(MAX_W, watts))
         self._last_target = watts
-        await self._client.write_register(address=POWER_REG, value=watts, slave=1, unit=1)
+        await self._client.write_register(address=POWER_REG, value=watts, slave=1)
         # also update local state so the Number shows the new value immediately
         self.async_set_updated_data({**self.data, "target_power": watts})
 
