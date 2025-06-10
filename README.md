@@ -36,6 +36,8 @@ A simple integration that lets Home Assistant talk to a **my‑PV AC ELWA 2*
 
 ## ⚙️ Configuration (UI‑only)
 
+This integration requires the **my-PV AC ELWA 2** to be set to **HTTP mode**.
+
 Add the integration via **Settings → Devices & Services → + Add** and fill in:
 
 | Field             | Default | Notes                                  |
