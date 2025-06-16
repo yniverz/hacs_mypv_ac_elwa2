@@ -44,7 +44,7 @@ Add the integration via **Settings → Devices & Services → + Add** and 
 |-------------------|---------|----------------------------------------|
 | **IP address**    | –       | ELWA 2 HTTP host                       |
 | **Poll interval** | 10 s    | Minimum 5 s                            |
-| **Resend target** | 30 s    | How often to resend a non‑zero target  |
+| **Resend target** | 30 s    | How often to resend the target  |
 
 No YAML required.
 

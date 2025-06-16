@@ -64,9 +64,7 @@ class ElwaCoordinator(DataUpdateCoordinator):
         """Periodically resend non-zero target to overcome the ELWA timeout."""
         while True:
             await asyncio.sleep(self._resend_sec)
-            # _LOGGER.warning("ELWA resend loop running for %s", self.host)
-            if self._last_target:
-                try:
-                    await self.write_target(self._last_target)
-                except Exception as exc:   # noqa: BLE001
-                    _LOGGER.warning("ELWA resend failed: %s", exc)
+            try:
+                await self.write_target(self._last_target)
+            except Exception as exc:   # noqa: BLE001
+                _LOGGER.warning("ELWA resend failed: %s", exc)
