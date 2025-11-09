@@ -39,7 +39,7 @@ class ElwaCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self):
         """Read temp & power in one round-trip."""
-        _LOGGER.warning("Fetching data from %s", self.host)
+        _LOGGER.info("Fetching data from %s", self.host)
 
         power = 0
         temp_raw = 0
